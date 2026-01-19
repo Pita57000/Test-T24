@@ -313,68 +313,68 @@ var h="";
 for(var i=0;i<R.length;i++){
 var r=R[i];
 h+="<div style=\"background:#fff;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #ddd\">";
-h+="<div style=\"display:flex;justify-content:space-between\"><b>Res. "+r.n+"</b>";
+h+="<div style=\"display:flex;justify-content:space-between\"><b>Res. "+esc(r.n)+"</b>";
 if(R.length>1)h+="<button onclick=\"delR("+r.id+")\" style=\"background:#dc3545;color:white;border:none;padding:4px 8px;border-radius:3px;cursor:pointer\">X</button>";
 h+="</div>";
-h+="<label>No</label><input value=\""+r.n+"\" onchange=\"updR("+r.id+",&quot;n&quot;,this.value)\">";
-h+="<label>Titre</label><textarea onchange=\"updR("+r.id+",&quot;t&quot;,this.value)\">"+r.t+"</textarea>";
+h+="<label>No</label><input value=\""+esc(r.n)+"\" onchange=\"updR("+r.id+",'n',this.value)\">";
+h+="<label>Titre</label><textarea onchange=\"updR("+r.id+",'t',this.value)\">"+esc(r.t)+"</textarea>";
 
-h+=”<label><input type="checkbox" “+(r.f?“checked”:””)+” onchange="updR(”+r.id+”,"f",this.checked)"> Info seulement</label>”;
-h+=”</div>”;
+h+="<label><input type=\"checkbox\" "+(r.f?"checked":"")+" onchange=\"updR("+r.id+",'f',this.checked)\"> Info seulement</label>";
+h+="</div>";
 }
-document.getElementById(“resc”).innerHTML=h;
+document.getElementById("resc").innerHTML=h;
 }
 
 function esc(t){
-return t?t.replace(/&/g,”&”).replace(/</g,”<”).replace(/>/g,”>”).replace(/”/g,”"”):””;
+return t?t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"):"";
 }
 
 function dt(d){
-return d?d+”:00Z”:“2026-01-01T00:00:00Z”;
+return d?d+":00Z":"2026-01-01T00:00:00Z";
 }
 
 function gen(){
-var x=”<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns="urn:iso:std:iso:20022:tech:xsd:seev.001.001.12">\n <MtgNtfctn>\n  <NtfctnGnlInf>\n   <NtfctnTp>NEWM</NtfctnTp>\n   <NtfctnSts>\n    <EvtCmpltnsSts>COMP</EvtCmpltnsSts>\n    <EvtConfSts>CONF</EvtConfSts>\n   </NtfctnSts>\n  </NtfctnGnlInf>\n  <Mtg>\n   <MtgId>”+(document.getElementById(“mid”).value||“GMET000”)+”</MtgId>\n   <IssrMtgId>”+(document.getElementById(“imid”).value||“GMET000”)+”</IssrMtgId>\n   <Tp>GMET</Tp>\n   <Clssfctn>\n    <Cd>ISSU</Cd>\n   </Clssfctn>\n   <AnncmntDt>\n    <DtTm>”+dt(document.getElementById(“ann”).value)+”</DtTm>\n   </AnncmntDt>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>PHYS</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>”+dt(document.getElementById(“vote”).value)+”</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n    <SpprtdByAcctSvcr>false</SpprtdByAcctSvcr>\n   </Prtcptn>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>PRXY</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>”+dt(document.getElementById(“vote”).value)+”</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n   </Prtcptn>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>EVOT</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>”+dt(document.getElementById(“vote”).value)+”</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n   </Prtcptn>\n   <Attndnc>\n    <ConfInf>To attend to the meeting the shareholder need to provide : ID and proof holding of shares</ConfInf>\n    <ConfMktDdln>\n     <DtOrDtTm>\n      <DtTm>”+dt(document.getElementById(“conf”).value)+”</DtTm>\n     </DtOrDtTm>\n    </ConfMktDdln>\n   </Attndnc>\n”;
-var u=document.getElementById(“url”).value;
-if(u)x+=”   <AddtlDcmnttnURLAdr>”+esc(u)+”</AddtlDcmnttnURLAdr>\n”;
-x+=”   <SctiesBlckgPrdEndDt>\n    <DtCd>\n     <Cd>MEET</Cd>\n    </DtCd>\n   </SctiesBlckgPrdEndDt>\n   <EntitlmntFxgDt>\n    <Dt>\n     <Dt>”+(document.getElementById(“rec”).value||“2026-01-01”)+”</Dt>\n    </Dt>\n    <DtMd>EODY</DtMd>\n   </EntitlmntFxgDt>\n  </Mtg>\n  <MtgDtls>\n   <DtAndTm>\n    <DtOrDtTm>\n     <DtTm>”+dt(document.getElementById(“mtg”).value)+”</DtTm>\n    </DtOrDtTm>\n   </DtAndTm>\n   <Lctn>\n    <Adr>\n”;
-var st=document.getElementById(“st”).value;
-var bn=document.getElementById(“bn”).value;
-var pc=document.getElementById(“pc”).value;
-if(st)x+=”     <StrtNm>”+esc(st)+”</StrtNm>\n”;
-if(bn)x+=”     <BldgNb>”+esc(bn)+”</BldgNb>\n”;
-if(pc)x+=”     <PstCd>”+esc(pc)+”</PstCd>\n”;
-x+=”     <TwnNm>”+esc(document.getElementById(“town”).value||“LUXEMBOURG”)+”</TwnNm>\n     <Ctry>LU</Ctry>\n    </Adr>\n   </Lctn>\n  </MtgDtls>\n  <Issr>\n   <Id>\n    <NmAndAdr>\n     <Nm>”+esc(document.getElementById(“iss”).value||“ISSUER”)+”</Nm>\n    </NmAndAdr>\n   </Id>\n  </Issr>\n  <IssrAgt>\n   <Id>\n    <AnyBIC>BILLLULLXXX</AnyBIC>\n   </Id>\n   <Role>PRIN</Role>\n  </IssrAgt>\n  <Scty>\n   <FinInstrmId>\n    <ISIN>”+(document.getElementById(“isin”).value||“LU0000000000”)+”</ISIN>\n   </FinInstrmId>\n   <Pos>\n    <AcctId>099992713</AcctId>\n    <HldgBal>\n     <Bal>\n      <ShrtLngPos>LONG</ShrtLngPos>\n      <Qty>\n       <Unit>”+(document.getElementById(“bal”).value||“0”)+”.</Unit>\n      </Qty>\n     </Bal>\n     <BalTp>ELIG</BalTp>\n    </HldgBal>\n   </Pos>\n  </Scty>\n”;
+var x="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:seev.001.001.12\">\n <MtgNtfctn>\n  <NtfctnGnlInf>\n   <NtfctnTp>NEWM</NtfctnTp>\n   <NtfctnSts>\n    <EvtCmpltnsSts>COMP</EvtCmpltnsSts>\n    <EvtConfSts>CONF</EvtConfSts>\n   </NtfctnSts>\n  </NtfctnGnlInf>\n  <Mtg>\n   <MtgId>"+esc(document.getElementById("mid").value||"GMET000")+"</MtgId>\n   <IssrMtgId>"+esc(document.getElementById("imid").value||"GMET000")+"</IssrMtgId>\n   <Tp>GMET</Tp>\n   <Clssfctn>\n    <Cd>ISSU</Cd>\n   </Clssfctn>\n   <AnncmntDt>\n    <DtTm>"+dt(document.getElementById("ann").value)+"</DtTm>\n   </AnncmntDt>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>PHYS</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>"+dt(document.getElementById("vote").value)+"</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n    <SpprtdByAcctSvcr>false</SpprtdByAcctSvcr>\n   </Prtcptn>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>PRXY</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>"+dt(document.getElementById("vote").value)+"</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n   </Prtcptn>\n   <Prtcptn>\n    <PrtcptnMtd>\n     <Cd>EVOT</Cd>\n    </PrtcptnMtd>\n    <IssrDdlnForVtng>\n     <DtOrDtTm>\n      <DtTm>"+dt(document.getElementById("vote").value)+"</DtTm>\n     </DtOrDtTm>\n    </IssrDdlnForVtng>\n   </Prtcptn>\n   <Attndnc>\n    <ConfInf>To attend to the meeting the shareholder need to provide : ID and proof holding of shares</ConfInf>\n    <ConfMktDdln>\n     <DtOrDtTm>\n      <DtTm>"+dt(document.getElementById("conf").value)+"</DtTm>\n     </DtOrDtTm>\n    </ConfMktDdln>\n   </Attndnc>\n";
+var u=document.getElementById("url").value;
+if(u)x+="   <AddtlDcmnttnURLAdr>"+esc(u)+"</AddtlDcmnttnURLAdr>\n";
+x+="   <SctiesBlckgPrdEndDt>\n    <DtCd>\n     <Cd>MEET</Cd>\n    </DtCd>\n   </SctiesBlckgPrdEndDt>\n   <EntitlmntFxgDt>\n    <Dt>\n     <Dt>"+esc(document.getElementById("rec").value||"2026-01-01")+"</Dt>\n    </Dt>\n    <DtMd>EODY</DtMd>\n   </EntitlmntFxgDt>\n  </Mtg>\n  <MtgDtls>\n   <DtAndTm>\n    <DtOrDtTm>\n     <DtTm>"+dt(document.getElementById("mtg").value)+"</DtTm>\n    </DtOrDtTm>\n   </DtAndTm>\n   <Lctn>\n    <Adr>\n";
+var st=document.getElementById("st").value;
+var bn=document.getElementById("bn").value;
+var pc=document.getElementById("pc").value;
+if(st)x+="     <StrtNm>"+esc(st)+"</StrtNm>\n";
+if(bn)x+="     <BldgNb>"+esc(bn)+"</BldgNb>\n";
+if(pc)x+="     <PstCd>"+esc(pc)+"</PstCd>\n";
+x+="     <TwnNm>"+esc(document.getElementById("town").value||"LUXEMBOURG")+"</TwnNm>\n     <Ctry>LU</Ctry>\n    </Adr>\n   </Lctn>\n  </MtgDtls>\n  <Issr>\n   <Id>\n    <NmAndAdr>\n     <Nm>"+esc(document.getElementById("iss").value||"ISSUER")+"</Nm>\n    </NmAndAdr>\n   </Id>\n  </Issr>\n  <IssrAgt>\n   <Id>\n    <AnyBIC>BILLLULLXXX</AnyBIC>\n   </Id>\n   <Role>PRIN</Role>\n  </IssrAgt>\n  <Scty>\n   <FinInstrmId>\n    <ISIN>"+esc(document.getElementById("isin").value||"LU0000000000")+"</ISIN>\n   </FinInstrmId>\n   <Pos>\n    <AcctId>099992713</AcctId>\n    <HldgBal>\n     <Bal>\n      <ShrtLngPos>LONG</ShrtLngPos>\n      <Qty>\n       <Unit>"+esc(document.getElementById("bal").value||"0")+".</Unit>\n      </Qty>\n     </Bal>\n     <BalTp>ELIG</BalTp>\n    </HldgBal>\n   </Pos>\n  </Scty>\n";
 for(var i=0;i<R.length;i++){
 var r=R[i];
-x+=” <Rsltn>\n  <IssrLabl>”+r.n+”</IssrLabl>\n  <Desc>\n   <Lang>en</Lang>\n   <Titl>”+esc(r.t)+”</Titl>\n  </Desc>\n  <ForInfOnly>”+(r.f?“true”:“false”)+”</ForInfOnly>\n  <Sts>ACTV</Sts>\n”;
+x+=" <Rsltn>\n  <IssrLabl>"+esc(r.n)+"</IssrLabl>\n  <Desc>\n   <Lang>en</Lang>\n   <Titl>"+esc(r.t)+"</Titl>\n  </Desc>\n  <ForInfOnly>"+(r.f?"true":"false")+"</ForInfOnly>\n  <Sts>ACTV</Sts>\n";
 if(!r.f){
-x+=”  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>CFOR</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>CAGS</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>ABST</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n”;
+x+="  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>CFOR</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>CAGS</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n  <VoteInstrTp>\n   <VoteInstrTpCd>\n    <Tp>ABST</Tp>\n   </VoteInstrTpCd>\n  </VoteInstrTp>\n";
 }
-x+=” </Rsltn>\n”;
+x+=" </Rsltn>\n";
 }
-x+=”  <Vote>\n   <PrtlVoteAllwd>false</PrtlVoteAllwd>\n   <SpltVoteAllwd>true</SpltVoteAllwd>\n   <VoteMthds>\n    <VoteByMail>\n     <EmailAdr>Banque Internationale a Luxembourg</EmailAdr>\n     <EmailAdr>69, Route d Esch</EmailAdr>\n     <EmailAdr>att to Listing Agent</EmailAdr>\n     <EmailAdr>PLM -101F</EmailAdr>\n     <EmailAdr>L-2953 Luxembourg</EmailAdr>\n    </VoteByMail>\n    <VoteByTel>0035245904597</VoteByTel>\n   </VoteMthds>\n   <RvcbltyMktDdln>\n    <DtOrDtTm>\n     <DtTm>”+dt(document.getElementById(“vote”).value)+”</DtTm>\n    </DtOrDtTm>\n   </RvcbltyMktDdln>\n   <BnfclOwnrDsclsr>true</BnfclOwnrDsclsr>\n  </Vote>\n  <AddtlInf>\n   <Dsclmr>\n    <Lang>en</Lang>\n    <AddtlInf>CONTACT:\nemail: as_agm@bil.com\ntelefon:0035245904597</AddtlInf>\n   </Dsclmr>\n   <Dsclmr>\n    <Lang>en</Lang>\n    <AddtlInf>The vote is inside the clearings.\nThe noteholder can vote by proxy, voting form, physically during the meeting or by electronic instruction.\nThe proof of holding, the voting form, the In person attendance declaration form, the proxy form and the voting form have to be sent by email or by post to centralizing agent.\nThe proxy, the voting form, the In person attendance declaration form are available on website.\nVote Abstention is the vote by default.</AddtlInf>\n   </Dsclmr>\n  </AddtlInf>\n </MtgNtfctn>\n</Document>”;
-document.getElementById(“out”).textContent=x;
+x+="  <Vote>\n   <PrtlVoteAllwd>false</PrtlVoteAllwd>\n   <SpltVoteAllwd>true</SpltVoteAllwd>\n   <VoteMthds>\n    <VoteByMail>\n     <EmailAdr>Banque Internationale a Luxembourg</EmailAdr>\n     <EmailAdr>69, Route d Esch</EmailAdr>\n     <EmailAdr>att to Listing Agent</EmailAdr>\n     <EmailAdr>PLM -101F</EmailAdr>\n     <EmailAdr>L-2953 Luxembourg</EmailAdr>\n    </VoteByMail>\n    <VoteByTel>0035245904597</VoteByTel>\n   </VoteMthds>\n   <RvcbltyMktDdln>\n    <DtOrDtTm>\n     <DtTm>"+dt(document.getElementById("vote").value)+"</DtTm>\n    </DtOrDtTm>\n   </RvcbltyMktDdln>\n   <BnfclOwnrDsclsr>true</BnfclOwnrDsclsr>\n  </Vote>\n  <AddtlInf>\n   <Dsclmr>\n    <Lang>en</Lang>\n    <AddtlInf>CONTACT:\nemail: as_agm@bil.com\ntelefon:0035245904597</AddtlInf>\n   </Dsclmr>\n   <Dsclmr>\n    <Lang>en</Lang>\n    <AddtlInf>The vote is inside the clearings.\nThe noteholder can vote by proxy, voting form, physically during the meeting or by electronic instruction.\nThe proof of holding, the voting form, the In person attendance declaration form, the proxy form and the voting form have to be sent by email or by post to centralizing agent.\nThe proxy, the voting form, the In person attendance declaration form are available on website.\nVote Abstention is the vote by default.</AddtlInf>\n   </Dsclmr>\n  </AddtlInf>\n </MtgNtfctn>\n</Document>";
+document.getElementById("out").textContent=x;
 }
 
 function copy(){
-var t=document.getElementById(“out”).textContent;
-var ta=document.createElement(“textarea”);
+var t=document.getElementById("out").textContent;
+var ta=document.createElement("textarea");
 ta.value=t;
 document.body.appendChild(ta);
 ta.select();
-document.execCommand(“copy”);
+document.execCommand("copy");
 document.body.removeChild(ta);
-msg(“XML copie!”,true);
+msg("XML copie!",true);
 }
 
 function dl(){
-var t=document.getElementById(“out”).textContent;
-var blob=new Blob([t],{type:“text/xml”});
+var t=document.getElementById("out").textContent;
+var blob=new Blob([t],{type:"text/xml"});
 var url=URL.createObjectURL(blob);
-var a=document.createElement(“a”);
+var a=document.createElement("a");
 a.href=url;
-a.download=“seev001_”+(document.getElementById(“mid”).value||“msg”)+”_”+new Date().toISOString().split(“T”)[0]+”.xml”;
+a.download="seev001_"+(document.getElementById("mid").value||"msg")+"_"+new Date().toISOString().split("T")[0]+".xml";
 a.click();
 }
 
