@@ -162,7 +162,7 @@ margin: 10px 0;
 </div>
 </div>
 
-```
+
 <div class="section-title">Informations Titre</div>
 <div class="form-group">
 <label>Nom Emetteur</label>
@@ -484,7 +484,7 @@ document.getElementById('timeVOTE').addEventListener('input', genererXML);
 document.getElementById('deadlineEARL').addEventListener('input', genererXML);
 document.getElementById('timeEARL').addEventListener('input', genererXML);
 </script>
-```
+
 
 </body>
 </html>
