@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur Swift MX seev.001</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+max-width: 1600px;
+margin: 0 auto;
+padding: 20px;
+background-color: #f5f5f5;
+}
+.container {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+background: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+h1 {
+grid-column: 1 / -1;
+text-align: center;
+color: #2c3e50;
+margin: 0 0 20px 0;
+}
+.form-section {
+padding: 10px;
+}
+.xml-section {
+padding: 10px;
+background: #282c34;
+border-radius: 5px;
+}
+.section-title {
+font-weight: bold;
+color: #2c3e50;
+margin: 15px 0 10px 0;
+padding-bottom: 5px;
+border-bottom: 2px solid #3498db;
+}
+.form-group {
+margin-bottom: 15px;
+}
+label {
+display: block;
+font-weight: 600;
+margin-bottom: 5px;
+font-size: 14px;
+}
+input, select, textarea {
+width: 100%;
+padding: 8px;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 14px;
+box-sizing: border-box;
+}
+textarea {
+min-height: 60px;
+font-family: Arial, sans-serif;
+}
+.grid-2 {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+.resolution {
+background: #f8f9fa;
+padding: 15px;
+border-radius: 5px;
+margin-bottom: 10px;
+border-left: 3px solid #3498db;
+}
+.resolution-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+}
+.btn {
+padding: 10px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-weight: 600;
+font-size: 14px;
+margin: 5px;
+}
+.btn-primary {
+background: #3498db;
+color: white;
+}
+.btn-success {
+background: #27ae60;
+color: white;
+}
+.btn-danger {
+background: #e74c3c;
+color: white;
+padding: 5px 10px;
+font-size: 12px;
+}
+.btn:hover {
+opacity: 0.9;
+}
+.xml-output {
+background: #1e1e1e;
+color: #98c379;
+padding: 15px;
+border-radius: 5px;
+font-family: 'Courier New', monospace;
+font-size: 11px;
+white-space: pre-wrap;
+word-wrap: break-word;
+overflow-x: auto;
+min-height: 400px;
+max-height: 600px;
+overflow-y: auto;
+}
+.checkbox-group {
+display: flex;
+gap: 15px;
+}
+.checkbox-group label {
+display: flex;
+align-items: center;
+}
+.checkbox-group input {
+width: auto;
+margin-right: 5px;
+}
+.deadline-row {
+display: grid;
+grid-template-columns: 2fr 2fr 1fr;
+gap: 10px;
+margin-bottom: 10px;
+align-items: end;
+}
+.action-buttons {
+margin: 10px 0;
+}
+</style>
+</head>
+<body>
+<h1>Générateur Swift MX seev.001 - BILLLULL Luxembourg</h1>
+<div class="container">
+<div class="form-section">
+<div class="section-title">Informations Message</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Message ID</label>
+<input type="text" id="messageId" value="SEEV-20250116-001">
+</div>
+<div class="form-group">
+<label>BIC Destinataire</label>
+<input type="text" id="receiverBIC" value="">
+</div>
+</div>
+
+```
+<div class="section-title">Informations Titre</div>
+<div class="form-group">
+<label>Nom Emetteur</label>
+<input type="text" id="issuerName" value="">
+</div>
+<div class="form-group">
+<label>Nom du Titre</label>
+<input type="text" id="securityName" value="">
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>ISIN</label>
+<input type="text" id="isin" value="">
+</div>
+<div class="form-group">
+<label>Common Code</label>
+<input type="text" id="commonCode" value="">
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Montant Outstanding</label>
+<input type="text" id="outstanding" value="">
+</div>
+<div class="form-group">
+<label>Devise</label>
+<select id="currency">
+<option value="EUR">EUR</option>
+<option value="USD">USD</option>
+<option value="GBP">GBP</option>
+<option value="CHF">CHF</option>
+</select>
+</div>
+</div>
+
+<div class="section-title">Depositaires Centraux</div>
+<div class="checkbox-group">
+<label><input type="checkbox" id="euroclear" checked> Euroclear</label>
+<label><input type="checkbox" id="clearstream" checked> Clearstream</label>
+<label><input type="checkbox" id="luxcsd"> LuxCSD</label>
+</div>
+
+<div class="section-title">Details Reunion</div>
+<div class="form-group">
+<label>Meeting ID</label>
+<input type="text" id="meetingId" value="">
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Date Reunion</label>
+<input type="date" id="meetingDate" value="">
+</div>
+<div class="form-group">
+<label>Heure</label>
+<input type="time" id="meetingTime" value="10:00">
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Lieu</label>
+<input type="text" id="location" value="Luxembourg">
+</div>
+<div class="form-group">
+<label>Record Date</label>
+<input type="date" id="recordDate" value="">
+</div>
+</div>
+<div class="form-group">
+<label>Adresse</label>
+<input type="text" id="address" value="">
+</div>
+
+<div class="section-title">Deadlines</div>
+<div class="deadline-row">
+<label>Registration</label>
+<input type="date" id="deadlineREGI">
+<input type="time" id="timeREGI" value="17:00">
+</div>
+<div class="deadline-row">
+<label>Voting</label>
+<input type="date" id="deadlineVOTE">
+<input type="time" id="timeVOTE" value="17:00">
+</div>
+<div class="deadline-row">
+<label>Early Voting</label>
+<input type="date" id="deadlineEARL">
+<input type="time" id="timeEARL" value="17:00">
+</div>
+
+<div class="section-title">Resolutions</div>
+<div id="resolutionsContainer"></div>
+<button class="btn btn-success" onclick="ajouterResolution()">Ajouter Resolution</button>
+</div>
+
+<div class="xml-section">
+<div class="section-title" style="color: white;">XML Genere</div>
+<div class="action-buttons">
+<button class="btn btn-success" onclick="copierXML()">Copier XML</button>
+<button class="btn btn-primary" onclick="telechargerXML()">Telecharger XML</button>
+</div>
+<pre id="xmlOutput" class="xml-output">Le XML apparaitra ici...</pre>
+</div>
+</div>
+
+<script>
+var resolutions = [];
+var compteur = 0;
+
+function init() {
+ajouterResolution();
+setTimeout(genererXML, 100);
+}
+
+function ajouterResolution() {
+compteur = compteur + 1;
+resolutions.push({
+id: compteur,
+numero: compteur.toString(),
+type: 'ORDY',
+quorum: '50',
+majorite: '50',
+description: ''
+});
+afficherResolutions();
+genererXML();
+}
+
+function supprimerResolution(id) {
+if (resolutions.length === 1) {
+alert('Il faut au moins une resolution');
+return;
+}
+var nouvelles = [];
+for (var i = 0; i < resolutions.length; i++) {
+if (resolutions[i].id !== id) {
+nouvelles.push(resolutions[i]);
+}
+}
+resolutions = nouvelles;
+afficherResolutions();
+genererXML();
+}
+
+function modifierResolution(id, champ, valeur) {
+for (var i = 0; i < resolutions.length; i++) {
+if (resolutions[i].id === id) {
+resolutions[i][champ] = valeur;
+break;
+}
+}
+genererXML();
+}
+
+function afficherResolutions() {
+var html = '';
+for (var i = 0; i < resolutions.length; i++) {
+var r = resolutions[i];
+html += '<div class="resolution">';
+html += '<div class="resolution-header">';
+html += '<span><b>Resolution ' + r.numero + '</b></span>';
+if (resolutions.length > 1) {
+html += '<button class="btn btn-danger" onclick="supprimerResolution(' + r.id + ')">Supprimer</button>';
+}
+html += '</div>';
+html += '<div class="grid-2">';
+html += '<div class="form-group"><label>Numero</label><input type="text" value="' + r.numero + '" onchange="modifierResolution(' + r.id + ', \'numero\', this.value)"></div>';
+html += '<div class="form-group"><label>Type</label><select onchange="modifierResolution(' + r.id + ', \'type\', this.value)">';
+html += '<option value="ORDY"' + (r.type === 'ORDY' ? ' selected' : '') + '>Ordinary</option>';
+html += '<option value="EXTR"' + (r.type === 'EXTR' ? ' selected' : '') + '>Extraordinary</option>';
+html += '</select></div>';
+html += '<div class="form-group"><label>Quorum %</label><input type="text" value="' + r.quorum + '" onchange="modifierResolution(' + r.id + ', \'quorum\', this.value)"></div>';
+html += '<div class="form-group"><label>Majorite %</label><input type="text" value="' + r.majorite + '" onchange="modifierResolution(' + r.id + ', \'majorite\', this.value)"></div>';
+html += '</div>';
+html += '<div class="form-group"><label>Description</label><textarea onchange="modifierResolution(' + r.id + ', \'description\', this.value)">' + r.description + '</textarea></div>';
+html += '</div>';
+}
+document.getElementById('resolutionsContainer').innerHTML = html;
+}
+
+function echapperXML(texte) {
+return texte.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function genererXML() {
+var messageId = document.getElementById('messageId').value || 'MSG-001';
+var receiverBIC = document.getElementById('receiverBIC').value || 'RECEIVERXXX';
+var issuerName = echapperXML(document.getElementById('issuerName').value || 'Issuer');
+var securityName = echapperXML(document.getElementById('securityName').value || 'Security');
+var isin = document.getElementById('isin').value || 'XX0000000000';
+var commonCode = document.getElementById('commonCode').value || 'XXXXXX';
+var outstanding = document.getElementById('outstanding').value || '0';
+var currency = document.getElementById('currency').value;
+var meetingId = document.getElementById('meetingId').value || 'MTG-001';
+var meetingDate = document.getElementById('meetingDate').value || '2025-01-01';
+var meetingTime = document.getElementById('meetingTime').value || '10:00';
+var location = echapperXML(document.getElementById('location').value || 'Luxembourg');
+var address = echapperXML(document.getElementById('address').value);
+var recordDate = document.getElementById('recordDate').value || '2025-01-01';
+
+var maintenant = new Date();
+var timestamp = maintenant.toISOString();
+
+var csdXml = '';
+if (document.getElementById('euroclear').checked) {
+csdXml += ' <SfkpgPlc>\n <Id>MGTCBEBEECL</Id>\n <Nm>Euroclear Bank</Nm>\n </SfkpgPlc>\n';
+}
+if (document.getElementById('clearstream').checked) {
+csdXml += ' <SfkpgPlc>\n <Id>CRESLULLXXX</Id>\n <Nm>Clearstream Banking Luxembourg</Nm>\n </SfkpgPlc>\n';
+}
+if (document.getElementById('luxcsd').checked) {
+csdXml += ' <SfkpgPlc>\n <Id>LXCSLULLXXX</Id>\n <Nm>LuxCSD</Nm>\n </SfkpgPlc>\n';
+}
+
+var deadlinesXml = '';
+var deadlineREGI = document.getElementById('deadlineREGI').value;
+var timeREGI = document.getElementById('timeREGI').value;
+if (deadlineREGI) {
+deadlinesXml += ' <Ddln>\n <DdlnCd>REGI</DdlnCd>\n <DdlnDtTm>' + deadlineREGI + 'T' + timeREGI + ':00</DdlnDtTm>\n </Ddln>\n';
+}
+var deadlineVOTE = document.getElementById('deadlineVOTE').value;
+var timeVOTE = document.getElementById('timeVOTE').value;
+if (deadlineVOTE) {
+deadlinesXml += ' <Ddln>\n <DdlnCd>VOTE</DdlnCd>\n <DdlnDtTm>' + deadlineVOTE + 'T' + timeVOTE + ':00</DdlnDtTm>\n </Ddln>\n';
+}
+var deadlineEARL = document.getElementById('deadlineEARL').value;
+var timeEARL = document.getElementById('timeEARL').value;
+if (deadlineEARL) {
+deadlinesXml += ' <Ddln>\n <DdlnCd>EARL</DdlnCd>\n <DdlnDtTm>' + deadlineEARL + 'T' + timeEARL + ':00</DdlnDtTm>\n </Ddln>\n';
+}
+
+var resolutionsXml = '';
+for (var i = 0; i < resolutions.length; i++) {
+var r = resolutions[i];
+var desc = echapperXML(r.description);
+resolutionsXml += ' <VoteInstr>\n';
+resolutionsXml += ' <VoteInstrId>' + messageId + '-RES' + r.numero + '</VoteInstrId>\n';
+resolutionsXml += ' <VoteOptn>\n <IssrLabl>' + r.numero + '</IssrLabl>\n </VoteOptn>\n';
+resolutionsXml += ' <VoteDtls>\n';
+resolutionsXml += ' <VoteInstrTp>' + (r.type === 'ORDY' ? 'Ordinary Resolution' : 'Extraordinary Resolution') + '</VoteInstrTp>\n';
+resolutionsXml += ' <VoteInstrDsgntn>' + r.type + '</VoteInstrDsgntn>\n </VoteDtls>\n';
+resolutionsXml += ' <VoteQrm>\n <QrmQty>' + r.quorum + '%</QrmQty>\n </VoteQrm>\n';
+resolutionsXml += ' <VoteMjrtyReqrmnt>' + r.majorite + '%</VoteMjrtyReqrmnt>\n';
+resolutionsXml += ' <AddtlInf>' + desc + '</AddtlInf>\n';
+resolutionsXml += ' </VoteInstr>\n';
+}
+
+var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+xml += '<Document xmlns="urn:iso:std:iso:20022:tech:xsd:seev.001.001.07">\n';
+xml += ' <MtgNtfctn>\n';
+xml += ' <MtgNtfctnId>\n <Id>' + messageId + '</Id>\n <CreDtTm>' + timestamp + '</CreDtTm>\n </MtgNtfctnId>\n';
+xml += ' <Sndr>\n <Id>\n <BICOrBEI>BILLLULL</BICOrBEI>\n </Id>\n </Sndr>\n';
+xml += ' <Rcvr>\n <Id>\n <BICOrBEI>' + receiverBIC + '</BICOrBEI>\n </Id>\n </Rcvr>\n';
+xml += ' <Scty>\n <FinInstrmId>\n <ISIN>' + isin + '</ISIN>\n';
+xml += ' <OthrId>\n <Id>' + commonCode + '</Id>\n <Tp>\n <Cd>COMM</Cd>\n </Tp>\n </OthrId>\n';
+xml += ' </FinInstrmId>\n <Nm>' + securityName + '</Nm>\n </Scty>\n';
+xml += ' <Issr>\n <Nm>' + issuerName + '</Nm>\n </Issr>\n';
+xml += csdXml;
+xml += ' <MtgDtls>\n <MtgId>' + meetingId + '</MtgId>\n';
+xml += ' <MtgDtAndTm>' + meetingDate + 'T' + meetingTime + ':00</MtgDtAndTm>\n';
+xml += ' <MtgTp>XMET</MtgTp>\n <MtgLctn>\n <Adr>\n <TwnNm>' + location + '</TwnNm>\n <Ctry>LU</Ctry>\n';
+if (address) {
+xml += ' <AdrLine>' + address + '</AdrLine>\n';
+}
+xml += ' </Adr>\n </MtgLctn>\n <RcrdDt>' + recordDate + '</RcrdDt>\n </MtgDtls>\n';
+xml += deadlinesXml;
+xml += ' <TtlNbOfSctiesOutsdng>\n <Unit>' + outstanding + '</Unit>\n <UnitCcy>' + currency + '</UnitCcy>\n </TtlNbOfSctiesOutsdng>\n';
+xml += resolutionsXml;
+xml += ' <AddtlInf>Generated ' + maintenant.toLocaleString() + '</AddtlInf>\n';
+xml += ' </MtgNtfctn>\n</Document>';
+
+document.getElementById('xmlOutput').textContent = xml;
+}
+
+function copierXML() {
+var texte = document.getElementById('xmlOutput').textContent;
+var temp = document.createElement('textarea');
+temp.value = texte;
+document.body.appendChild(temp);
+temp.select();
+document.execCommand('copy');
+document.body.removeChild(temp);
+alert('XML copie!');
+}
+
+function telechargerXML() {
+var texte = document.getElementById('xmlOutput').textContent;
+var messageId = document.getElementById('messageId').value || 'seev001';
+var date = new Date().toISOString().split('T')[0];
+var blob = new Blob([texte], {type: 'text/xml'});
+var url = URL.createObjectURL(blob);
+var a = document.createElement('a');
+a.href = url;
+a.download = 'seev001_' + messageId + '_' + date + '.xml';
+a.click();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+document.getElementById('messageId').addEventListener('input', genererXML);
+document.getElementById('receiverBIC').addEventListener('input', genererXML);
+document.getElementById('issuerName').addEventListener('input', genererXML);
+document.getElementById('securityName').addEventListener('input', genererXML);
+document.getElementById('isin').addEventListener('input', genererXML);
+document.getElementById('commonCode').addEventListener('input', genererXML);
+document.getElementById('outstanding').addEventListener('input', genererXML);
+document.getElementById('currency').addEventListener('change', genererXML);
+document.getElementById('euroclear').addEventListener('change', genererXML);
+document.getElementById('clearstream').addEventListener('change', genererXML);
+document.getElementById('luxcsd').addEventListener('change', genererXML);
+document.getElementById('meetingId').addEventListener('input', genererXML);
+document.getElementById('meetingDate').addEventListener('input', genererXML);
+document.getElementById('meetingTime').addEventListener('input', genererXML);
+document.getElementById('location').addEventListener('input', genererXML);
+document.getElementById('address').addEventListener('input', genererXML);
+document.getElementById('recordDate').addEventListener('input', genererXML);
+document.getElementById('deadlineREGI').addEventListener('input', genererXML);
+document.getElementById('timeREGI').addEventListener('input', genererXML);
+document.getElementById('deadlineVOTE').addEventListener('input', genererXML);
+document.getElementById('timeVOTE').addEventListener('input', genererXML);
+document.getElementById('deadlineEARL').addEventListener('input', genererXML);
+document.getElementById('timeEARL').addEventListener('input', genererXML);
+</script>
+```
+
+</body>
+</html>
