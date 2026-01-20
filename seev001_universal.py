@@ -86,8 +86,14 @@ def extraire_dates(texte):
     recMatch = re.search(rf'(\d{{1,2}})\s+({months_regex})\s+(\d{{4}})\s+\(midnight\)', texte, re.I)
     if not recMatch: recMatch = re.search(rf'record date\s*[:\s]\s*(\d{{1,2}})\s+({months_regex})\s+(\d{{4}})', texte, re.I)
     if recMatch: res['record_date'] = parse_date(recMatch.group(1), recMatch.group(2), recMatch.group(3))
-    dlMatch = re.search(rf'(\d{{1,2}})\s+({months_regex})\s+(\d{{4}})\s+at\s+(\d{{1,2}}):(\d{{2}})\s*p\.?m', texte, re.I)
-    if dlMatch: res['deadline'] = parse_date(dlMatch.group(1), dlMatch.group(2), dlMatch.group(3)) + f"T{str(int(dlMatch.group(4)) + 12).zfill(2)}:{dlMatch.group(5)}"
+    # Handling AM/PM and potential 12:00 edge cases
+    dlMatch = re.search(rf'(\d{{1,2}})\s+({months_regex})\s+(\d{{4}})\s+at\s+(\d{{1,2}}):(\d{{2}})\s*(p\.?m|a\.?m)?', texte, re.I)
+    if dlMatch:
+        h = int(dlMatch.group(4))
+        ampm = dlMatch.group(6).lower() if dlMatch.group(6) else ""
+        if 'p' in ampm and h < 12: h += 12
+        elif 'a' in ampm and h == 12: h = 0
+        res['deadline'] = parse_date(dlMatch.group(1), dlMatch.group(2), dlMatch.group(3)) + f"T{str(h).zfill(2)}:{dlMatch.group(5)}"
     return res
 
 def extraire_heure(texte):
@@ -434,11 +440,22 @@ def main():
 
         # 7. Sauvegarder
         timestamp = dt_obj.now().strftime('%Y%m%d_%H%M%S')
-        company_short = donnees.get('company_name', 'Company')[:20].replace(' ', '_')
+        company_raw = donnees.get('company_name', 'Company')
+        # Sanitize filename for Windows
+        company_short = re.sub(r'[<>:"/\\|?*]', '', company_raw)[:20].strip().replace(' ', '_')
         nom_fichier = f'SEEV001_{company_short}_{timestamp}.xml'
 
-        with open(nom_fichier, 'w', encoding='utf-8') as f:
-            f.write(xml_content)
+        try:
+            with open(nom_fichier, 'w', encoding='utf-8') as f:
+                f.write(xml_content)
+        except PermissionError:
+            # Fallback to home directory
+            home = os.path.expanduser("~")
+            fallback_path = os.path.join(home, nom_fichier)
+            print(f"⚠️  Permission refusée dans le dossier local. Tentative de sauvegarde dans : {home}")
+            with open(fallback_path, 'w', encoding='utf-8') as f:
+                f.write(xml_content)
+            nom_fichier = fallback_path
 
         print()
         print("=" * 70)
